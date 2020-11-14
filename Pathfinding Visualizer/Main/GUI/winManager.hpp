@@ -38,8 +38,9 @@ public:
   }
   ~Window()
   {
-    delete matrix;
-    delete algoMan;
+    delete this->matrix;
+    delete this->algoMan;
+    delete this->infoTab;
   }
   void run(){
 
@@ -71,6 +72,7 @@ public:
       sf::Event ev;
       while(window.pollEvent(ev))
       {
+        // Window events
         if (ev.type == sf::Event::Closed)
             window.close();
         else if(ev.type == sf::Event::Resized)
@@ -88,6 +90,7 @@ public:
               window.setView(sf::View(visibleArea));
           }
         }
+        // Keyboard and mouse events
         if(ev.mouseButton.button == sf::Mouse::Left)
         {
           if(ev.type == sf::Event::MouseButtonPressed)
@@ -129,6 +132,7 @@ public:
             ctrl = false;
         }
       }
+      // For button UI mainly
       if(LMClick)
       {
         if(c<5) c++;
@@ -138,7 +142,7 @@ public:
         }
       }
 
-      //Matrix management
+      // Matrix and algo management
       if(matrix->getSize().x!=gui.matrix_W || matrix->getSize().y!=gui.matrix_H)
       {
         this->matrix->setSize(gui.matrix_W,gui.matrix_H);
@@ -152,6 +156,7 @@ public:
         gui.running = false;
       if(gui.resetMatrix)
         this->matrix->resetMat();
+        
       //Window display
       window.clear();
       gui.onGUI(window);

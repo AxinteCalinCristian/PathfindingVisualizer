@@ -23,10 +23,12 @@ private:
   std::vector<std::vector<int>> matrix;
   sf::Vector2i origin={-1,-1},dest={-1,-1};
 public:
+  // public variables for determining state of matrix before starting algo
   bool settingOrigin = false;
   bool settingDest = false;
   bool settingWalls = false;
   bool settingWeights = false;
+
   Matrix(int width,int height):width(width),height(height)
   {
     matrix.resize(height,std::vector<int>(width));
@@ -51,7 +53,6 @@ public:
     matrix.resize(height);
     for(int i=0;i<matrix.size();i++)
       matrix[i].resize(width);
-    std::cout<<this->matrix.size()<<'\t'<<this->matrix[0].size()<<'\n';
   }
   sf::Vector2i getSize()
   {
@@ -67,16 +68,17 @@ public:
     cell.setOutlineColor(sf::Color::Black);
     if(settingOrigin && cell.getGlobalBounds().contains(sf::Mouse::getPosition(window).x,sf::Mouse::getPosition(window).y))
     {
-      origin = {i,j};
+      this->origin = {i,j};
       settingOrigin = false;
       matrix[i][j]=CELL_SRC;
     }
     if(settingDest && cell.getGlobalBounds().contains(sf::Mouse::getPosition(window).x,sf::Mouse::getPosition(window).y))
     {
-      dest = {i,j};
+      this->dest = {i,j};
       settingDest = false;
       matrix[i][j]=CELL_DEST;
     }
+    // Origin and dest cells
     if(i==origin.x && j==origin.y)
     {
       cell.setFillColor(sf::Color(avg_red));
@@ -89,8 +91,8 @@ public:
       window.draw(cell);
       return;
     }
-    if(settingWalls && cell.getGlobalBounds().contains(sf::Mouse::getPosition(window).x,sf::Mouse::getPosition(window).y)
-    && matrix[i][j]!=CELL_DEST && matrix[i][j]!=CELL_SRC)
+    // Walls and weights cells
+    if(settingWalls && cell.getGlobalBounds().contains(sf::Mouse::getPosition(window).x,sf::Mouse::getPosition(window).y) && matrix[i][j]!=CELL_DEST && matrix[i][j]!=CELL_SRC)
     {
       matrix[i][j]=CELL_WALL, cell.setFillColor(sf::Color(blue_gray));
       window.draw(cell);
@@ -102,8 +104,7 @@ public:
       window.draw(cell);
       return;
     }
-    if(settingWeights && cell.getGlobalBounds().contains(sf::Mouse::getPosition(window).x,sf::Mouse::getPosition(window).y)
-    && matrix[i][j]!=CELL_DEST && matrix[i][j]!=CELL_SRC)
+    if(settingWeights && cell.getGlobalBounds().contains(sf::Mouse::getPosition(window).x,sf::Mouse::getPosition(window).y) && matrix[i][j]!=CELL_DEST && matrix[i][j]!=CELL_SRC)
     {
       matrix[i][j]=CELL_WEIGHT, cell.setFillColor(sf::Color(aqua));
       window.draw(cell);
@@ -115,6 +116,7 @@ public:
       window.draw(cell);
       return;
     }
+    //Algo cells - visited and final path
     if(matrix[i][j]==CELL_VISITED)
     {
       cell.setFillColor(sf::Color(light_teal));
@@ -127,6 +129,7 @@ public:
       window.draw(cell);
       return;
     }
+    //Defaul values for idle and hover
     matrix[i][j]=CELL_IDLE;
     if(cell.getGlobalBounds().contains(sf::Mouse::getPosition(window).x,sf::Mouse::getPosition(window).y))
       cell.setFillColor(sf::Color(warm_orange));
@@ -139,7 +142,7 @@ public:
     for(int i=0;i<this->height;i++)
       for(int j=0;j<this->width;j++)
         this->matrix[i][j]=CELL_IDLE;
-    origin={-1,-1}; dest={-1,-1};
+    this->origin={-1,-1}; this->dest={-1,-1};
   }
   void renderMatrix(sf::RenderWindow& window)
   {

@@ -40,36 +40,6 @@ private:
       }
     }
   }
-  void arrangeDirVec(sf::Vector2i src, sf::Vector2i dest)
-  {
-    if(src.x<=dest.x)
-    {
-        if(src.y<=dest.y){
-          rowNum[0]=1,colNum[0]=0;
-          rowNum[1]=0,colNum[1]=1;
-          rowNum[2]=0,colNum[2]=-1;
-          rowNum[3]=-1,colNum[3]=0;
-        }else{
-          rowNum[0]=1,colNum[0]=0;
-          rowNum[1]=0,colNum[1]=-1;
-          rowNum[2]=0,colNum[2]=1;
-          rowNum[3]=-1,colNum[3]=0;
-        }
-    }else
-    {
-      if(src.y<=dest.y){
-        rowNum[0]=-1,colNum[0]=0;
-        rowNum[1]=0,colNum[1]=-1;
-        rowNum[2]=0,colNum[2]=1;
-        rowNum[3]=1,colNum[3]=0;
-      }else{
-        rowNum[0]=-1,colNum[0]=0;
-        rowNum[1]=0,colNum[1]=1;
-        rowNum[2]=0,colNum[2]=-1;
-        rowNum[3]=1,colNum[3]=0;
-      }
-    }
-  }
 public:
   DFS(Matrix *& matrix, bool *& running)
   {
@@ -82,7 +52,6 @@ public:
     *running = true;
     std::cout<<"staredDFS\n";
     sf::Vector2i src = this->matrix->getSource(), dest = this->matrix->getDest();
-    //arrangeDirVec(src,dest);
     std::vector<std::vector<int>>& matr = *(this->matrix->getMatrix());
     int ROW = matr.size(), COL = matr[0].size();
     std::stack<sf::Vector2i> st;
@@ -101,11 +70,8 @@ public:
         st.pop();
       }
       reverse(v.begin(),v.end());
-      std::cout<<v.size()<<'\n';
-      for(auto it:v) sf::sleep(sf::seconds(0.01)), matr[it.first][it.second] = CELL_PATH,std::cout<<it.first<<' '<<it.second<<'\n';
+      for(auto it:v) sf::sleep(sf::seconds(0.01)), matr[it.first][it.second] = CELL_PATH;
     }
-    else
-      std::cout<<"No path found\n";
     *running = false;
   }
 };

@@ -14,7 +14,7 @@ private:
   bool* running;
   inline bool isValid(int row, int col,int ROW, int COL){ return (row >= 0) && (row < ROW) && (col >= 0) && (col < COL); }
   inline int64_t max(int64_t a,int64_t b) { return (a>b?a:b);}
-  int dijkstra(std::vector<std::vector<int>>* matr, sf::Vector2i src, sf::Vector2i dest)
+  void dijkstra(std::vector<std::vector<int>>* matr, sf::Vector2i src, sf::Vector2i dest)
   {
     int len = -1;
     std::vector<std::vector<int>>& mat = *(matr);
@@ -98,7 +98,6 @@ private:
         i--;
       }
     }
-    return path.size()-1;
 }
 public:
   Dijkstra(Matrix *& matrix, bool *& running)
@@ -111,10 +110,7 @@ public:
     *running = true;
     std::cout<<"staredDijkstra\n";
     sf::Vector2i src = this->matrix->getSource(), dest = this->matrix->getDest();
-    //std::cout<<src.x<<'\t'<<src.y<<'\n'<<dest.x<<'\t'<<dest.y<<'\n';
-    int x = dijkstra(this->matrix->getMatrix(),src,dest);
-    if(x==-1) std::cout<<"No path found\n";
-    else std::cout<<"Path length: "<<x<<'\n';
+    dijkstra(this->matrix->getMatrix(),src,dest);
     *running = false;
   }
 };

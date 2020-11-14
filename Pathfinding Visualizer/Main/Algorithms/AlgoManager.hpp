@@ -1,7 +1,6 @@
 #ifndef ALGOMAN_H
 #define ALGOMAN_H
 
-#include "SwarmAlgo.hpp"
 #include "BeFSAlgo.hpp"
 #include "BFSAlgo.hpp"
 #include "DFSAlgo.hpp"
@@ -13,7 +12,6 @@ class AlgoManager{
 
 private:
   int currActive=-1;
-  Swarm* swarm;
   BeFS* befs;
   BFS* bfs;
   DFS* dfs;
@@ -28,7 +26,6 @@ public:
     this->running = new bool;
     *(this->running) = false;
     this->matrix = matrix;
-    this->swarm = new Swarm;
     this->befs = new BeFS(this->matrix,running);
     this->bfs = new BFS(this->matrix,running);
     this->dfs = new DFS(this->matrix,running);
@@ -37,7 +34,6 @@ public:
   }
   ~AlgoManager()
   {
-    delete swarm;
     delete befs;
     delete bfs;
     delete dfs;
@@ -48,7 +44,6 @@ public:
   {
     if(matrix.getSource().x==-1 || matrix.getSource().y==-1 || matrix.getDest().x==-1 || matrix.getDest().y==-1)
     {
-      std::cout<<"Source or destination not selected";
       return;
     }
     if(!(*(this->running)))

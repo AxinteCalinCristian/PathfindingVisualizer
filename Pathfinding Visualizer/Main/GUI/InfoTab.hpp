@@ -14,12 +14,10 @@
 class InfoTab{
 private:
   sf::Text text;
-  std::string s="A* is weighted and generally offers the shortest path,\nas it is based on heuristics. It is generally the best choice in pathfinding.\n\nDijkstra is weighted and guarantees the shortest path.\n\nBreadth First Search is non weighted and guarantees the shortest path.\n\nDepth First Search is non weighted and does not guarantee\nthe shortest path.\n\nBest First Search is weighted and does not guarantee the shortest path.\n\n";
-  std::string s2="Controls:\nShift + LMB -> Place source\t\t\t Ctrl + LMB -> Place destination\nRMB -> Place walls\t\t\t\t\t\t  Shift+RMB -> Place weights\nF11 -> Toggle fullscreen\t\t\t\t   Esc -> Close application";
+  std::string s="A* is weighted and generally offers the shortest path,\nas it is based on heuristics. It is generally the best choice in pathfinding.\n\nDijkstra is weighted and guarantees the shortest path.\n\nBreadth First Search is non weighted and guarantees the shortest path.\n\nDepth First Search is non weighted and does not guarantee\nthe shortest path.\n\nBest First Search is weighted and does not guarantee the shortest path.\n\nControls:\nShift + LMB -> Place source\t\t\t Ctrl + LMB -> Place destination\nRMB -> Place walls\t\t\t\t\t\t  Shift+RMB -> Place weights\nF11 -> Toggle fullscreen\t\t\t\t   Esc -> Close application";
 public:
   InfoTab(sf::Font& font)
   {
-    s+=s2;
     this->text.setString(this->s);
     this->text.setFillColor(sf::Color(dark_purple));
     this->text.setFont(font);

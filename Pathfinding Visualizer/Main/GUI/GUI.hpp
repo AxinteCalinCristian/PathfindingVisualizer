@@ -160,7 +160,7 @@ public:
     x=window.getSize().x/32.,y=12*window.getSize().y/14.-window.getSize().y/6., width=height=maxD(window.getSize().y/16.,window.getSize().x/16.);
     buttons[1]->render(window,x,y,width,height);
     buttons[1]->update(sf::Mouse::getPosition(window),this->LMClick);
-    if(buttons[1]->toggled)
+    if(buttons[1]->toggled && !running)
     {
       for(int i = 1; i<buttons.size(); i++)
         if(i!=1)
@@ -173,7 +173,7 @@ public:
     x=5*window.getSize().x/32.,y=12*window.getSize().y/14.-window.getSize().y/6., width=height=maxD(window.getSize().y/16.,window.getSize().x/16.);
     buttons[2]->render(window,x,y,width,height);
     buttons[2]->update(sf::Mouse::getPosition(window),this->LMClick);
-    if(buttons[2]->toggled)
+    if(buttons[2]->toggled && !running)
     {
       for(int i = 1; i<buttons.size(); i++)
         if(i!=2)
@@ -186,7 +186,7 @@ public:
     x=window.getSize().x/32.,y=12*window.getSize().y/14.-2*window.getSize().y/6., width=height=maxD(window.getSize().y/16.,window.getSize().x/16.);
     buttons[3]->render(window,x,y,width,height);
     buttons[3]->update(sf::Mouse::getPosition(window),this->LMClick);
-    if(buttons[3]->toggled)
+    if(buttons[3]->toggled && !running)
     {
       for(int i = 1; i<buttons.size(); i++)
         if(i!=3)
@@ -199,7 +199,7 @@ public:
     x=5*window.getSize().x/32.,y=12*window.getSize().y/14.-2*window.getSize().y/6., width=height=maxD(window.getSize().y/16.,window.getSize().x/16.);
     buttons[4]->render(window,x,y,width,height);
     buttons[4]->update(sf::Mouse::getPosition(window),this->LMClick);
-    if(buttons[4]->toggled)
+    if(buttons[4]->toggled && !running)
     {
       for(int i = 1; i<buttons.size(); i++)
         if(i!=4)
@@ -212,7 +212,7 @@ public:
     x=window.getSize().x/32.,y=12*window.getSize().y/14.-3*window.getSize().y/6., width=height=maxD(window.getSize().y/16.,window.getSize().x/16.);
     buttons[5]->render(window,x,y,width,height);
     buttons[5]->update(sf::Mouse::getPosition(window),this->LMClick);
-    if(buttons[5]->toggled)
+    if(buttons[5]->toggled && !running)
     {
       for(int i = 1; i<buttons.size(); i++)
         if(i!=5)
@@ -225,7 +225,7 @@ public:
     x=5*window.getSize().x/32.,y=12*window.getSize().y/14.-3*window.getSize().y/6., width=height=maxD(window.getSize().y/16.,window.getSize().x/16.);
     buttons[6]->render(window,x,y,width,height);
     buttons[6]->update(sf::Mouse::getPosition(window),this->LMClick);
-    if(buttons[6]->toggled)
+    if(buttons[6]->toggled && !running)
     {
       for(int i = 1; i<buttons.size(); i++)
         if(i!=6)
@@ -238,7 +238,7 @@ public:
     x=window.getSize().x/32.,y=3.2*window.getSize().y/14., width=3.*window.getSize().x/16.,height=window.getSize().y/14.;
     buttons[7]->render(window,x,y,width,height);
     buttons[7]->update(sf::Mouse::getPosition(window),this->LMClick);
-    if(buttons[7]->isPressed())
+    if(buttons[7]->isPressed() && !running)
     {
       //Set Dimensions of Matrix
       if(tboxes[0]->getText().length()>0)
@@ -268,7 +268,7 @@ public:
     {
       prevAlgo = currAlgo;
       currAlgo = currActive;
-      if(prevAlgo != currAlgo)
+      if(prevAlgo != currAlgo && !running)
         resetMatrix = true;
     }
     if(buttons[0]->isPressed() && !startPressed)

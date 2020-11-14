@@ -111,7 +111,6 @@ class AStar{
               {
                   cellDetails[i-1][j].parent_i = i;
                   cellDetails[i-1][j].parent_j = j;
-                  std::cout<<"destReached\n";
                   tracePath (cellDetails, dest, grid);
                   foundDest = true;
                   return;
@@ -140,7 +139,6 @@ class AStar{
               {
                   cellDetails[i+1][j].parent_i = i;
                   cellDetails[i+1][j].parent_j = j;
-                  std::cout<<"destReached\n";
                   tracePath (cellDetails, dest, grid);
                   foundDest = true;
                   return;
@@ -169,7 +167,6 @@ class AStar{
               {
                   cellDetails[i][j+1].parent_i = i;
                   cellDetails[i][j+1].parent_j = j;
-                  std::cout<<"destReached\n";
                   tracePath (cellDetails, dest, grid);
                   foundDest = true;
                   return;
@@ -198,7 +195,6 @@ class AStar{
               {
                   cellDetails[i][j-1].parent_i = i;
                   cellDetails[i][j-1].parent_j = j;
-                  std::cout<<"destReached\n";
                   tracePath (cellDetails, dest, grid);
                   foundDest = true;
                   return;
